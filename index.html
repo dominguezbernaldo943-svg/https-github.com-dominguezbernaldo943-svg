@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <title>Thanksgiving Menu – Dominguez Family</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <style>
     :root {
       --bg: #f7efe3;
@@ -16,9 +15,7 @@
       --radius: 22px;
       --shadow: 0 10px 24px rgba(0,0,0,0.18);
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -26,23 +23,21 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
+      align-items: center;
+      padding: 16px;
     }
-
     .shell {
-      max-width: 860px;
+      max-width: 960px;
       width: 100%;
       background: #fdf7ec;
       border-radius: 28px;
       border: 3px solid #deba8a;
       box-shadow: var(--shadow);
-      padding: 24px 20px 26px;
+      padding: 18px 16px 20px;
       position: relative;
       overflow: hidden;
     }
-
     .shell::before,
     .shell::after {
       content: "";
@@ -53,136 +48,197 @@
       opacity: 0.55;
       pointer-events: none;
     }
-
     .shell::before { top: -50px; left: -40px; }
     .shell::after { bottom: -60px; right: -40px; }
-
     header {
       position: relative;
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       z-index: 1;
     }
-
     header h1 {
-      font-size: 2.1rem;
+      font-size: 2rem;
       margin: 0;
       color: var(--accent);
     }
-
     .subtitle {
       margin-top: 4px;
       font-size: 0.9rem;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-
-    .tabs {
+    .lang-tabs {
       display: inline-flex;
       gap: 8px;
       padding: 3px;
-      margin: 14px auto 4px;
+      margin: 12px auto 4px;
       border-radius: 999px;
       background: #f0dfc6;
       border: 1px solid #e0c39a;
     }
-
-    .tab-btn {
+    .lang-btn {
       border: none;
       background: transparent;
-      padding: 6px 14px;
+      padding: 5px 14px;
       border-radius: 999px;
       font-size: 0.9rem;
       font-weight: 600;
       color: #7a5a35;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
       transition: background 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s;
     }
-
-    .tab-btn span.emoji { font-size: 1.1rem; }
-
-    .tab-btn.active {
+    .lang-btn.active {
       background: #fffaf3;
       color: var(--accent);
       transform: translateY(-1px);
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
-
     .note {
       font-size: 0.78rem;
       color: var(--muted);
       margin-top: 2px;
     }
-
-    .menu-card {
+    .lang-panel { display: none; }
+    .lang-panel.active { display: block; }
+    .section {
       position: relative;
       z-index: 1;
-      margin-top: 12px;
+      margin-top: 10px;
       background: var(--card);
       border-radius: var(--radius);
       border: 1px solid #e4d2b6;
-      padding: 18px 18px 18px;
+      padding: 14px 14px 16px;
+      margin-bottom: 10px;
     }
-
-    .menu-title {
+    .section h2 {
+      margin: 0 0 8px;
       font-size: 1.2rem;
-      text-align: center;
-      margin: 0 0 10px;
       color: var(--accent);
+      text-align: center;
     }
-
     .menu-item {
-      margin: 10px 0 14px;
-      text-align: left;
+      margin: 8px 0 10px;
     }
-
     .menu-item-title {
       font-weight: 700;
       font-size: 1rem;
       display: flex;
-      align-items: baseline;
       gap: 6px;
+      align-items: baseline;
     }
-
     .menu-item-title span.emoji { font-size: 1.1rem; }
-
     .menu-item-desc {
       font-size: 0.9rem;
       color: var(--muted);
       margin-top: 2px;
     }
-
     .menu-item-ingredients {
       font-size: 0.8rem;
       color: #665546;
       font-style: italic;
       margin-top: 2px;
     }
-
-    .panel { display: none; }
-    .panel.active { display: block; }
-
+    .games-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+      gap: 10px;
+    }
+    @media (max-width: 720px) {
+      .games-grid { grid-template-columns: 1fr; }
+    }
+    .tic-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .tic-cell {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      border-radius: 10px;
+      background: #f3e0c4;
+      border: 1px solid #d3b28d;
+      cursor: pointer;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .tic-cell span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .tic-status {
+      font-size: 0.85rem;
+      margin-top: 4px;
+      color: var(--muted);
+    }
+    .btn-small {
+      border-radius: 999px;
+      border: 1px solid #d0b083;
+      background: #f7e3c3;
+      padding: 3px 9px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .scramble-word {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .scramble-entry {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+    .scramble-answer {
+      display: none;
+      font-style: italic;
+      color: #5f4a3b;
+    }
+    .palette {
+      display: flex;
+      gap: 6px;
+      margin: 6px 0 8px;
+      flex-wrap: wrap;
+    }
+    .color-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #c9a886;
+      cursor: pointer;
+    }
+    .color-dot.active {
+      box-shadow: 0 0 0 2px #8b5a2b;
+    }
+    .turkey-wrap {
+      background: #fff;
+      border-radius: 14px;
+      padding: 8px;
+      border: 1px dashed #d3b28d;
+    }
+    .turkey-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
     footer {
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      margin-top: 10px;
+      margin-top: 4px;
       position: relative;
       z-index: 1;
-    }
-
-    @media (max-width: 640px) {
-      body { padding: 16px; }
-      .shell {
-        padding: 18px 14px 20px;
-        border-radius: 20px;
-      }
-      header h1 { font-size: 1.7rem; }
-      .menu-card { padding: 14px 12px 16px; }
     }
   </style>
 </head>
@@ -191,200 +247,378 @@
     <header>
       <h1>Thanksgiving Dinner</h1>
       <div class="subtitle">Dominguez Family Menu</div>
-
-      <div class="tabs" role="tablist">
-        <button class="tab-btn active" data-target="adult" role="tab" aria-selected="true">
-          <span class="emoji">🍽️</span><span>Adult Menu</span>
-        </button>
-        <button class="tab-btn" data-target="kids" role="tab" aria-selected="false">
-          <span class="emoji">🧒</span><span>Kids Menu</span>
-        </button>
+      <div class="lang-tabs">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="es">Español</button>
       </div>
-      <div class="note">Tap to switch between adult and kids menus.</div>
+      <div class="note">Tap to change language. Kids section has games.</div>
     </header>
 
-    <!-- Adult Menu -->
-    <section id="adult" class="panel active" aria-label="Adult menu">
-      <div class="menu-card">
-        <h2 class="menu-title">Adult Menu</h2>
+    <!-- English Panel -->
+    <section id="lang-en" class="lang-panel active">
+      <div class="section">
+        <h2>Adult Menu (English)</h2>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥔</span><span>Scalloped Potatoes</span>
-          </div>
-          <div class="menu-item-desc">
-            Thinly sliced potatoes baked in a rich, creamy cheese sauce until tender and golden.
-          </div>
-          <div class="menu-item-ingredients">
-            Potatoes, heavy cream, butter, garlic, cheddar, Gruyère, salt, pepper
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥔</span><span>Scalloped Potatoes</span></div>
+          <div class="menu-item-desc">Thinly sliced potatoes baked in a rich, creamy cheese sauce until tender and golden.</div>
+          <div class="menu-item-ingredients">Potatoes, heavy cream, butter, garlic, cheddar, Gruyère, salt, pepper</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥦</span><span>Green Bean Casserole</span>
-          </div>
-          <div class="menu-item-desc">
-            Fresh green beans in a creamy mushroom sauce, topped with crispy fried onions.
-          </div>
-          <div class="menu-item-ingredients">
-            Green beans, mushrooms, onions, butter, cream, Parmesan, crispy fried onions
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥦</span><span>Green Bean Casserole</span></div>
+          <div class="menu-item-desc">Fresh green beans in a creamy mushroom sauce, topped with crispy fried onions.</div>
+          <div class="menu-item-ingredients">Green beans, mushrooms, onions, butter, cream, Parmesan, crispy fried onions</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥗</span><span>Autumn Harvest Salad</span>
-          </div>
-          <div class="menu-item-desc">
-            A crisp fall salad with sweet apples, tangy cheese, and crunchy nuts.
-          </div>
-          <div class="menu-item-ingredients">
-            Mixed greens, apples, dried cranberries, candied pecans, goat or feta cheese, honey–Dijon vinaigrette
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥗</span><span>Autumn Harvest Salad</span></div>
+          <div class="menu-item-desc">Crisp greens with apples, cranberries, nuts and tangy cheese.</div>
+          <div class="menu-item-ingredients">Mixed greens, apples, dried cranberries, candied pecans, goat or feta cheese, honey–Dijon vinaigrette</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🧀</span><span>Cheddar Biscuits</span>
-          </div>
-          <div class="menu-item-desc">
-            Warm, fluffy biscuits with melty cheddar and a buttery garlic finish.
-          </div>
-          <div class="menu-item-ingredients">
-            Cheddar biscuit mix, cheddar cheese, milk, butter, garlic
-          </div>
+          <div class="menu-item-title"><span class="emoji">🧀</span><span>Cheddar Biscuits</span></div>
+          <div class="menu-item-desc">Warm, fluffy biscuits with melty cheddar and a buttery garlic finish.</div>
+          <div class="menu-item-ingredients">Cheddar biscuit mix, cheddar cheese, milk, butter, garlic</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥧</span><span>Caramel Apple Pie</span>
-          </div>
-          <div class="menu-item-desc">
-            Classic apple pie with spiced apples and rich homemade caramel.
-          </div>
-          <div class="menu-item-ingredients">
-            Apples, pie crust, sugar, cinnamon, nutmeg, butter, caramel
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥧</span><span>Caramel Apple Pie</span></div>
+          <div class="menu-item-desc">Classic apple pie with spiced apples and rich homemade caramel.</div>
+          <div class="menu-item-ingredients">Apples, pie crust, sugar, cinnamon, nutmeg, butter, caramel</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">☕</span><span>Iced Café Leche</span>
-          </div>
+          <div class="menu-item-title"><span class="emoji">☕</span><span>Iced Café Leche</span></div>
+          <div class="menu-item-desc">Strong coffee blended with cold milk and a touch of sweetness.</div>
+          <div class="menu-item-ingredients">Coffee, milk or half-and-half, ice, sugar (optional)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Kids Menu & Games</h2>
+
+        <div class="menu-item">
+          <div class="menu-item-title"><span class="emoji">🍽️</span><span>Kids Menu</span></div>
           <div class="menu-item-desc">
-            Strong coffee blended with cold milk and a touch of sweetness.
+            Creamy cheesy potatoes, green bean crunch, cheesy bread bites, sweet apple pie, kid-style café con leche, and an optional vanilla ice cream scoop.
           </div>
-          <div class="menu-item-ingredients">
-            Coffee, milk or half-and-half, ice, sugar (optional)
+        </div>
+
+        <div class="games-grid">
+          <!-- Tic Tac Toe -->
+          <div>
+            <strong>🎲 Tic-Tac-Toe</strong>
+            <div class="tic-board" id="tic-board-en">
+              <button class="tic-cell" data-cell="0"><span></span></button>
+              <button class="tic-cell" data-cell="1"><span></span></button>
+              <button class="tic-cell" data-cell="2"><span></span></button>
+              <button class="tic-cell" data-cell="3"><span></span></button>
+              <button class="tic-cell" data-cell="4"><span></span></button>
+              <button class="tic-cell" data-cell="5"><span></span></button>
+              <button class="tic-cell" data-cell="6"><span></span></button>
+              <button class="tic-cell" data-cell="7"><span></span></button>
+              <button class="tic-cell" data-cell="8"><span></span></button>
+            </div>
+            <div class="tic-status" id="tic-status-en">X goes first. Two players, take turns.</div>
+            <button class="btn-small" data-reset="en">Reset Game</button>
           </div>
+
+          <!-- Word Scramble -->
+          <div>
+            <strong>🔤 Word Scramble</strong>
+            <div class="scramble-entry">
+              <span class="scramble-word">VOTRKEY</span> –
+              <button class="btn-small" data-answer-target="a1-en">Show</button>
+              <div class="scramble-answer" id="a1-en">Answer: TURKEY</div>
+            </div>
+            <div class="scramble-entry">
+              <span class="scramble-word">PIPA ELAPP</span> –
+              <button class="btn-small" data-answer-target="a2-en">Show</button>
+              <div class="scramble-answer" id="a2-en">Answer: APPLE PIE</div>
+            </div>
+            <div class="scramble-entry">
+              <span class="scramble-word">NEERG SNAEB</span> –
+              <button class="btn-small" data-answer-target="a3-en">Show</button>
+              <div class="scramble-answer" id="a3-en">Answer: GREEN BEANS</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coloring Turkey -->
+        <div style="margin-top:10px;">
+          <strong>🦃 Color the Turkey</strong>
+          <div class="palette">
+            <div class="color-dot active" data-color="#f4b41a" style="background:#f4b41a;"></div>
+            <div class="color-dot" data-color="#e07a5f" style="background:#e07a5f;"></div>
+            <div class="color-dot" data-color="#81b29a" style="background:#81b29a;"></div>
+            <div class="color-dot" data-color="#f2cc8f" style="background:#f2cc8f;"></div>
+            <div class="color-dot" data-color="#cfcfcf" style="background:#cfcfcf;"></div>
+            <div class="color-dot" data-color="#b56576" style="background:#b56576;"></div>
+          </div>
+          <div class="turkey-wrap">
+            <svg viewBox="0 0 200 160">
+              <ellipse class="color-part" cx="110" cy="100" rx="40" ry="35" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <circle class="color-part" cx="80" cy="80" r="20" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <polygon points="68,80 55,75 55,85" fill="#f4b41a" stroke="#000000" stroke-width="1.5"/>
+              <circle cx="85" cy="75" r="4" fill="#000000"/>
+              <ellipse class="color-part" cx="130" cy="60" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="150" cy="70" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="160" cy="90" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="140" cy="110" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <line x1="100" y1="130" x2="95" y2="150" stroke="#000000" stroke-width="2"/>
+              <line x1="120" y1="130" x2="125" y2="150" stroke="#000000" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="turkey-note">Tap a color, then tap the turkey parts to fill. You can also print this page and color it with crayons.</div>
         </div>
       </div>
     </section>
 
-    <!-- Kids Menu -->
-    <section id="kids" class="panel" aria-label="Kids menu">
-      <div class="menu-card">
-        <h2 class="menu-title">Kids Menu</h2>
+    <!-- Spanish Panel -->
+    <section id="lang-es" class="lang-panel">
+      <div class="section">
+        <h2>Menú Adultos (Español)</h2>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">✨</span><span>Creamy Cheesy Potatoes</span>
-          </div>
-          <div class="menu-item-desc">
-            Soft potatoes baked in a mild, melty cheese sauce.
-          </div>
-          <div class="menu-item-ingredients">
-            Potatoes, mild cheese sauce, butter, cream
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥔</span><span>Papas Gratinadas</span></div>
+          <div class="menu-item-desc">Papas en rebanadas finas horneadas en una salsa cremosa de queso hasta quedar doradas y suaves.</div>
+          <div class="menu-item-ingredients">Papas, crema espesa, mantequilla, ajo, cheddar, Gruyère, sal, pimienta</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🌱</span><span>Green Bean Crunch</span>
-          </div>
-          <div class="menu-item-desc">
-            Tender green beans with fun, crunchy onion topping.
-          </div>
-          <div class="menu-item-ingredients">
-            Green beans, creamy sauce, crispy onions
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥦</span><span>Cazuela de Ejotes</span></div>
+          <div class="menu-item-desc">Ejotes frescos en salsa cremosa de champiñón, cubiertos con cebolla frita crujiente.</div>
+          <div class="menu-item-ingredients">Ejotes, champiñones, cebolla, mantequilla, crema, parmesano, cebolla frita</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥖</span><span>Cheesy Bread Bites</span>
-          </div>
-          <div class="menu-item-desc">
-            Warm, fluffy biscuit bites filled with cheese.
-          </div>
-          <div class="menu-item-ingredients">
-            Biscuit dough, cheddar cheese, butter
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥗</span><span>Ensalada Otoñal</span></div>
+          <div class="menu-item-desc">Mezcla de hojas verdes con manzana, arándanos, nuez garapiñada y queso.</div>
+          <div class="menu-item-ingredients">Lechugas mixtas, manzanas, arándanos secos, nuez garapiñada, queso de cabra o feta, aderezo de miel con mostaza Dijon</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🍎</span><span>Sweet Apple Pie</span>
-          </div>
-          <div class="menu-item-desc">
-            Warm apple pie with a sweet caramel drizzle.
-          </div>
-          <div class="menu-item-ingredients">
-            Apples, pastry crust, sugar, cinnamon, caramel
-          </div>
+          <div class="menu-item-title"><span class="emoji">🧀</span><span>Panecillos de Queso</span></div>
+          <div class="menu-item-desc">Panecillos esponjosos y tibios con queso cheddar y mantequilla con ajo.</div>
+          <div class="menu-item-ingredients">Mezcla para panecillos cheddar, queso cheddar, leche, mantequilla, ajo</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🥛</span><span>Café con Leche (Kid Style)</span>
-          </div>
-          <div class="menu-item-desc">
-            Warm milk with just a tiny splash of coffee.
-          </div>
-          <div class="menu-item-ingredients">
-            Milk, a little coffee, sugar (optional)
-          </div>
+          <div class="menu-item-title"><span class="emoji">🥧</span><span>Pay de Manzana con Caramelo</span></div>
+          <div class="menu-item-desc">Pay clásico de manzana con especias y caramelo casero.</div>
+          <div class="menu-item-ingredients">Manzanas, base de pay, azúcar, canela, nuez moscada, mantequilla, caramelo</div>
         </div>
 
         <div class="menu-item">
-          <div class="menu-item-title">
-            <span class="emoji">🍦</span><span>Optional Treat</span>
-          </div>
+          <div class="menu-item-title"><span class="emoji">☕</span><span>Café con Leche Frío</span></div>
+          <div class="menu-item-desc">Café fuerte mezclado con leche fría y un toque de azúcar.</div>
+          <div class="menu-item-ingredients">Café, leche o media crema, hielo, azúcar (opcional)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Menú Infantil y Juegos</h2>
+
+        <div class="menu-item">
+          <div class="menu-item-title"><span class="emoji">🍽️</span><span>Menú Infantil</span></div>
           <div class="menu-item-desc">
-            Vanilla ice cream scoop to go with the pie.
+            Papas cremosas con queso, ejotes crujientes, panecitos de queso, pay de manzana dulce, café con leche para niños y una bola opcional de helado de vainilla.
           </div>
-          <div class="menu-item-ingredients">
-            Vanilla ice cream
+        </div>
+
+        <div class="games-grid">
+          <!-- Tic Tac Toe ES -->
+          <div>
+            <strong>🎲 Gato (Tic-Tac-Toe)</strong>
+            <div class="tic-board" id="tic-board-es">
+              <button class="tic-cell" data-cell="0"><span></span></button>
+              <button class="tic-cell" data-cell="1"><span></span></button>
+              <button class="tic-cell" data-cell="2"><span></span></button>
+              <button class="tic-cell" data-cell="3"><span></span></button>
+              <button class="tic-cell" data-cell="4"><span></span></button>
+              <button class="tic-cell" data-cell="5"><span></span></button>
+              <button class="tic-cell" data-cell="6"><span></span></button>
+              <button class="tic-cell" data-cell="7"><span></span></button>
+              <button class="tic-cell" data-cell="8"><span></span></button>
+            </div>
+            <div class="tic-status" id="tic-status-es">Empieza la X. Dos jugadores, por turnos.</div>
+            <button class="btn-small" data-reset="es">Reiniciar</button>
           </div>
+
+          <!-- Word Scramble ES -->
+          <div>
+            <strong>🔤 Palabras Revuelta</strong>
+            <div class="scramble-entry">
+              <span class="scramble-word">PAVO</span> –
+              <button class="btn-small" data-answer-target="a1-es">Mostrar</button>
+              <div class="scramble-answer" id="a1-es">Respuesta: PAVO</div>
+            </div>
+            <div class="scramble-entry">
+              <span class="scramble-word">PAY NAAZPAM</span> –
+              <button class="btn-small" data-answer-target="a2-es">Mostrar</button>
+              <div class="scramble-answer" id="a2-es">Respuesta: PAY DE MANZANA</div>
+            </div>
+            <div class="scramble-entry">
+              <span class="scramble-word">EJOTES</span> –
+              <button class="btn-small" data-answer-target="a3-es">Mostrar</button>
+              <div class="scramble-answer" id="a3-es">Respuesta: EJOTES</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coloring turkey ES uses same SVG & palette -->
+        <div style="margin-top:10px;">
+          <strong>🦃 Colorea el Pavo</strong>
+          <div class="palette">
+            <div class="color-dot active" data-color="#f4b41a" style="background:#f4b41a;"></div>
+            <div class="color-dot" data-color="#e07a5f" style="background:#e07a5f;"></div>
+            <div class="color-dot" data-color="#81b29a" style="background:#81b29a;"></div>
+            <div class="color-dot" data-color="#f2cc8f" style="background:#f2cc8f;"></div>
+            <div class="color-dot" data-color="#cfcfcf" style="background:#cfcfcf;"></div>
+            <div class="color-dot" data-color="#b56576" style="background:#b56576;"></div>
+          </div>
+          <div class="turkey-wrap">
+            <svg viewBox="0 0 200 160">
+              <ellipse class="color-part" cx="110" cy="100" rx="40" ry="35" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <circle class="color-part" cx="80" cy="80" r="20" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <polygon points="68,80 55,75 55,85" fill="#f4b41a" stroke="#000000" stroke-width="1.5"/>
+              <circle cx="85" cy="75" r="4" fill="#000000"/>
+              <ellipse class="color-part" cx="130" cy="60" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="150" cy="70" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="160" cy="90" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <ellipse class="color-part" cx="140" cy="110" rx="15" ry="30" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+              <line x1="100" y1="130" x2="95" y2="150" stroke="#000000" stroke-width="2"/>
+              <line x1="120" y1="130" x2="125" y2="150" stroke="#000000" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="turkey-note">Elige un color y toca el pavo para colorear. También puedes imprimir la página y colorear con crayones.</div>
         </div>
       </div>
     </section>
 
     <footer>
-      Scan the QR code to open this menu on your phone.
+      Scan / escanea el código QR en la mesa para ver este menú en tu teléfono.
     </footer>
   </main>
 
   <script>
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const panels = {
-      adult: document.getElementById('adult'),
-      kids: document.getElementById('kids')
+    // Language switch
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const langPanels = {
+      en: document.getElementById('lang-en'),
+      es: document.getElementById('lang-es')
     };
-
-    tabButtons.forEach(btn => {
+    langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
-
-        tabButtons.forEach(b => {
-          b.classList.toggle('active', b === btn);
-          b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        const lang = btn.dataset.lang;
+        langButtons.forEach(b => b.classList.toggle('active', b === btn));
+        Object.keys(langPanels).forEach(code => {
+          langPanels[code].classList.toggle('active', code === lang);
         });
+      });
+    });
 
-        Object.keys(panels).forEach(id => {
-          panels[id].classList.toggle('active', id === target);
+    // Tic tac toe logic
+    function setupTicTacToe(boardId, statusId) {
+      const board = document.getElementById(boardId);
+      const status = document.getElementById(statusId);
+      const cells = Array.from(board.querySelectorAll('.tic-cell'));
+      let current = 'X';
+      let finished = false;
+
+      function reset() {
+        current = 'X';
+        finished = false;
+        cells.forEach(c => c.querySelector('span').textContent = '');
+        if (statusId.endsWith('en')) {
+          status.textContent = 'X goes first. Two players, take turns.';
+        } else {
+          status.textContent = 'Empieza la X. Dos jugadores, por turnos.';
+        }
+      }
+
+      function checkWin() {
+        const lines = [
+          [0,1,2],[3,4,5],[6,7,8],
+          [0,3,6],[1,4,7],[2,5,8],
+          [0,4,8],[2,4,6]
+        ];
+        const vals = cells.map(c => c.querySelector('span').textContent);
+        for (const [a,b,c] of lines) {
+          if (vals[a] && vals[a] === vals[b] && vals[a] === vals[c]) {
+            return vals[a];
+          }
+        }
+        if (vals.every(v => v)) return 'draw';
+        return null;
+      }
+
+      cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+          if (finished) return;
+          const span = cell.querySelector('span');
+          if (span.textContent) return;
+          span.textContent = current;
+          const result = checkWin();
+          if (result === 'X' || result === 'O') {
+            finished = true;
+            if (statusId.endsWith('en')) {
+              status.textContent = result + ' wins!';
+            } else {
+              status.textContent = '¡Ganó ' + result + '!';
+            }
+          } else if (result === 'draw') {
+            finished = true;
+            status.textContent = statusId.endsWith('en') ? 'It\'s a draw!' : '¡Empate!';
+          } else {
+            current = current === 'X' ? 'O' : 'X';
+            if (statusId.endsWith('en')) {
+              status.textContent = current + ' turn.';
+            } else {
+              status.textContent = 'Turno de ' + current + '.';
+            }
+          }
         });
+      });
+
+      reset();
+      return reset;
+    }
+
+    const resetEn = setupTicTacToe('tic-board-en', 'tic-status-en');
+    const resetEs = setupTicTacToe('tic-board-es', 'tic-status-es');
+
+    document.querySelectorAll('[data-reset="en"]').forEach(btn => btn.addEventListener('click', resetEn));
+    document.querySelectorAll('[data-reset="es"]').forEach(btn => btn.addEventListener('click', resetEs));
+
+    // Word scramble show/hide
+    document.querySelectorAll('[data-answer-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-answer-target');
+        const ans = document.getElementById(id);
+        const isShown = ans.style.display === 'block';
+        ans.style.display = isShown ? 'none' : 'block';
+        btn.textContent = isShown ? (id.endsWith('en') ? 'Show' : 'Mostrar') : (id.endsWith('en') ? 'Hide' : 'Ocultar');
+      });
+    });
+
+    // Coloring turkey
+    let currentColor = '#f4b41a';
+    const colorDots = document.querySelectorAll('.color-dot');
+    const colorParts = document.querySelectorAll('.color-part');
+
+    colorDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        currentColor = dot.getAttribute('data-color');
+        colorDots.forEach(d => d.classList.toggle('active', d === dot));
+      });
+    });
+
+    colorParts.forEach(part => {
+      part.addEventListener('click', () => {
+        part.setAttribute('fill', currentColor);
       });
     });
   </script>
