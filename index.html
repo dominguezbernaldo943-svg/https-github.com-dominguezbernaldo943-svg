@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Thanksgiving Menu – Dominguez Family</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #f7efe3;
+      --card: #fffaf3;
+      --ink: #3a2b20;
+      --accent: #8b5a2b;
+      --accent-soft: #f3e0c4;
+      --muted: #7a6a5b;
+      --radius: 22px;
+      --shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fdf6e9, #f1e0c9);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .shell {
+      max-width: 860px;
+      width: 100%;
+      background: #fdf7ec;
+      border-radius: 28px;
+      border: 3px solid #deba8a;
+      box-shadow: var(--shadow);
+      padding: 24px 20px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, #f3d3aa 0, transparent 70%);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .shell::before { top: -50px; left: -40px; }
+    .shell::after { bottom: -60px; right: -40px; }
+
+    header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 16px;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      padding: 3px;
+      margin: 14px auto 4px;
+      border-radius: 999px;
+      background: #f0dfc6;
+      border: 1px solid #e0c39a;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #7a5a35;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s;
+    }
+
+    .tab-btn span.emoji { font-size: 1.1rem; }
+
+    .tab-btn.active {
+      background: #fffaf3;
+      color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .menu-card {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid #e4d2b6;
+      padding: 18px 18px 18px;
+    }
+
+    .menu-title {
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 0 0 10px;
+      color: var(--accent);
+    }
+
+    .menu-item {
+      margin: 10px 0 14px;
+      text-align: left;
+    }
+
+    .menu-item-title {
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .menu-item-title span.emoji { font-size: 1.1rem; }
+
+    .menu-item-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .menu-item-ingredients {
+      font-size: 0.8rem;
+      color: #665546;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 16px; }
+      .shell {
+        padding: 18px 14px 20px;
+        border-radius: 20px;
+      }
+      header h1 { font-size: 1.7rem; }
+      .menu-card { padding: 14px 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>Thanksgiving Dinner</h1>
+      <div class="subtitle">Dominguez Family Menu</div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-target="adult" role="tab" aria-selected="true">
+          <span class="emoji">🍽️</span><span>Adult Menu</span>
+        </button>
+        <button class="tab-btn" data-target="kids" role="tab" aria-selected="false">
+          <span class="emoji">🧒</span><span>Kids Menu</span>
+        </button>
+      </div>
+      <div class="note">Tap to switch between adult and kids menus.</div>
+    </header>
+
+    <!-- Adult Menu -->
+    <section id="adult" class="panel active" aria-label="Adult menu">
+      <div class="menu-card">
+        <h2 class="menu-title">Adult Menu</h2>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥔</span><span>Scalloped Potatoes</span>
+          </div>
+          <div class="menu-item-desc">
+            Thinly sliced potatoes baked in a rich, creamy cheese sauce until tender and golden.
+          </div>
+          <div class="menu-item-ingredients">
+            Potatoes, heavy cream, butter, garlic, cheddar, Gruyère, salt, pepper
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥦</span><span>Green Bean Casserole</span>
+          </div>
+          <div class="menu-item-desc">
+            Fresh green beans in a creamy mushroom sauce, topped with crispy fried onions.
+          </div>
+          <div class="menu-item-ingredients">
+            Green beans, mushrooms, onions, butter, cream, Parmesan, crispy fried onions
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥗</span><span>Autumn Harvest Salad</span>
+          </div>
+          <div class="menu-item-desc">
+            A crisp fall salad with sweet apples, tangy cheese, and crunchy nuts.
+          </div>
+          <div class="menu-item-ingredients">
+            Mixed greens, apples, dried cranberries, candied pecans, goat or feta cheese, honey–Dijon vinaigrette
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🧀</span><span>Cheddar Biscuits</span>
+          </div>
+          <div class="menu-item-desc">
+            Warm, fluffy biscuits with melty cheddar and a buttery garlic finish.
+          </div>
+          <div class="menu-item-ingredients">
+            Cheddar biscuit mix, cheddar cheese, milk, butter, garlic
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥧</span><span>Caramel Apple Pie</span>
+          </div>
+          <div class="menu-item-desc">
+            Classic apple pie with spiced apples and rich homemade caramel.
+          </div>
+          <div class="menu-item-ingredients">
+            Apples, pie crust, sugar, cinnamon, nutmeg, butter, caramel
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">☕</span><span>Iced Café Leche</span>
+          </div>
+          <div class="menu-item-desc">
+            Strong coffee blended with cold milk and a touch of sweetness.
+          </div>
+          <div class="menu-item-ingredients">
+            Coffee, milk or half-and-half, ice, sugar (optional)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kids Menu -->
+    <section id="kids" class="panel" aria-label="Kids menu">
+      <div class="menu-card">
+        <h2 class="menu-title">Kids Menu</h2>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">✨</span><span>Creamy Cheesy Potatoes</span>
+          </div>
+          <div class="menu-item-desc">
+            Soft potatoes baked in a mild, melty cheese sauce.
+          </div>
+          <div class="menu-item-ingredients">
+            Potatoes, mild cheese sauce, butter, cream
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🌱</span><span>Green Bean Crunch</span>
+          </div>
+          <div class="menu-item-desc">
+            Tender green beans with fun, crunchy onion topping.
+          </div>
+          <div class="menu-item-ingredients">
+            Green beans, creamy sauce, crispy onions
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥖</span><span>Cheesy Bread Bites</span>
+          </div>
+          <div class="menu-item-desc">
+            Warm, fluffy biscuit bites filled with cheese.
+          </div>
+          <div class="menu-item-ingredients">
+            Biscuit dough, cheddar cheese, butter
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🍎</span><span>Sweet Apple Pie</span>
+          </div>
+          <div class="menu-item-desc">
+            Warm apple pie with a sweet caramel drizzle.
+          </div>
+          <div class="menu-item-ingredients">
+            Apples, pastry crust, sugar, cinnamon, caramel
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🥛</span><span>Café con Leche (Kid Style)</span>
+          </div>
+          <div class="menu-item-desc">
+            Warm milk with just a tiny splash of coffee.
+          </div>
+          <div class="menu-item-ingredients">
+            Milk, a little coffee, sugar (optional)
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-title">
+            <span class="emoji">🍦</span><span>Optional Treat</span>
+          </div>
+          <div class="menu-item-desc">
+            Vanilla ice cream scoop to go with the pie.
+          </div>
+          <div class="menu-item-ingredients">
+            Vanilla ice cream
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Scan the QR code to open this menu on your phone.
+    </footer>
+  </main>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const panels = {
+      adult: document.getElementById('adult'),
+      kids: document.getElementById('kids')
+    };
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+
+        tabButtons.forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        });
+
+        Object.keys(panels).forEach(id => {
+          panels[id].classList.toggle('active', id === target);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
